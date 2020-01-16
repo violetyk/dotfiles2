@@ -44,6 +44,13 @@ end
 # rbenv
 rbenv init - | source
 
+# dircolors
+if type -q gdircolors
+   and test -f ~/.dircolors
+   and test -r ~/.dircolors
+   eval (gdircolors -c ~/.dircolors)
+end
+
 function fish_user_key_bindings
   bind \cs peco_select_ghq_look
   bind \cr peco_select_history
