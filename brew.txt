@@ -1,0 +1,19 @@
+fish
+git
+git-lfs
+gibo
+tig
+tmux
+hub
+ghq
+jq
+peco
+vim --HEAD
+wget
+ag
+ripgrep
+fd
+openssl
+universal-ctags/universal-ctags/universal-ctags --HEAD
+ricty --with-powerline
+direnv
