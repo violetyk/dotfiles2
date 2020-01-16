@@ -1,0 +1,33 @@
+# fish
+fish_variables
+
+# vim
+.*.un~
+*~
+*.swp
+.init.vimrc
+.local.vimrc
+.netrwhist
+vim/bundle/*
+vim/manual/*
+
+# git
+.gitconfig.local
+
+# php
+.cake
+composer.phar
+setting.local.php
+core.local.php
+
+# debug
+kagaya/
+[Kk]agaya*.php
+[Kk]agaya*.yml
+[Kk]agaya*.html
+
+# other
+__pycache__
+tags
+.agignore
+.vscode

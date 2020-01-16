@@ -1,0 +1,12 @@
+# golang.org/x/tools/cmd/goimports
+# golang.org/x/tools/cmd/cover
+# golang.org/x/tools/cmd/godoc
+golang.org/x/tools/cmd/...
+golang.org/x/lint/golint
+github.com/motemen/gore
+github.com/nsf/gocode
+github.com/k0kubun/pp
+github.com/rogpeppe/godef
+github.com/jstemmer/gotags
+github.com/mattn/gom
+github.com/b4b4r07/gist

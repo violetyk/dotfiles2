@@ -1,0 +1,1 @@
+/Users/violetyk/src/github.com/violetyk/dotfiles/roles/fish/files/functions/peco_select_fd_file.fish
