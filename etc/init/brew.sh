@@ -8,6 +8,6 @@ fi
 brew tap sanemat/font
 
 cat ./brew.txt | grep -v "^#" | xargs brew install
-cat .brew_cask.txt | grep -v "^#" | xargs brew cask install
+cat ./brew_cask.txt | grep -v "^#" | xargs brew cask install
 
 brew upgrade
