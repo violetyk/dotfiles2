@@ -1,8 +1,8 @@
 # fish
-./config/fish/fish_variables
-./config/fisher
+.config/fish/fish_variables
+.config/fisher
 
 # vim
-./vim/bundle
-./vim/plugged
-./vim/autoload/plug.vim
+.vim/bundle
+.vim/plugged
+.vim/autoload/plug.vim
