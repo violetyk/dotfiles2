@@ -14,6 +14,9 @@ vim/manual/*
 # git
 .gitconfig.local
 
+# python
+.venv
+
 # php
 .cake
 composer.phar
