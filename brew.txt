@@ -18,3 +18,4 @@ universal-ctags/universal-ctags/universal-ctags --HEAD
 ricty --with-powerline
 direnv
 coreutils
+nkf
