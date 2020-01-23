@@ -6,3 +6,12 @@
 .vim/bundle
 .vim/plugged
 .vim/autoload/plug.vim
+
+# ipython
+.ipython/profile_default/db
+.ipython/profile_default/log
+.ipython/profile_default/security
+.ipython/profile_default/history.sqlite
+
+
+!.gitkeep
