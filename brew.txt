@@ -19,3 +19,4 @@ ricty --with-powerline
 direnv
 coreutils
 nkf
+composer
