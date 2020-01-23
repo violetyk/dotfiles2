@@ -1,3 +1,4 @@
+awscli
 fish
 git
 git-lfs
