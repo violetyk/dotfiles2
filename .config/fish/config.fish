@@ -51,6 +51,11 @@ if type -q gdircolors
    eval (gdircolors -c ~/.dircolors)
 end
 
+# awscli
+if type -q aws_completer
+  complete -c aws -f -a '(begin; set -lx COMP_SHELL fish; set -lx COMP_LINE (commandline); /usr/local/bin/aws_completer | sed \'s/ $//\'; end)'
+end
+
 function fish_user_key_bindings
   bind \cs peco_select_ghq_look
   bind \cr peco_select_history
