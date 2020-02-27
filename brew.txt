@@ -21,3 +21,4 @@ direnv
 coreutils
 nkf
 composer
+redis
