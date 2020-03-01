@@ -20,7 +20,6 @@ call plug#begin(s:plugin_dir)
 " base
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'vim-jp/vimdoc-ja'
-" if has('lua') | Plug 'Shougo/neocomplete.vim' | endif
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neossh.vim'
@@ -63,31 +62,18 @@ Plug 'akiyan/vim-textobj-xml-attribute'
 Plug 'rhysd/vim-textobj-ruby', { 'for' : ['ruby', 'rtb', 'slim', 'haml'] }
 
 " completion
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-
-" lsp
-Plug 'junegunn/fzf'
-Plug 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
-
-" (Completion plugin option 1)
-" Plug 'roxma/nvim-completion-manager'
-" (Completion plugin option 2)
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-
-
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 
 " filer
 Plug 'scrooloose/nerdtree'
 
 " outliner
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " ctags support
 Plug 'vim-php/tagbar-phpctags.vim'
@@ -110,7 +96,7 @@ Plug 'rking/ag.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
-Plug 'rhysd/github-complete.vim'
+Plug 'tpope/vim-rhubarb'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'takahirojin/gbr.vim'
@@ -122,7 +108,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'thinca/vim-prettyprint', { 'for' : 'vim' }
 
 " php
-Plug 'joonty/vdebug', {'for' : 'php'}
+" Plug 'vim-vdebug/vdebug', {'for' : 'php'}
 Plug 'Rican7/php-doc-modded', {'for' : 'php'}
 
 " twig
@@ -138,10 +124,10 @@ Plug 'tpope/vim-dispatch', {'for' : 'ruby'}
 Plug 'thoughtbot/vim-rspec', {'for' : 'ruby'}
 
 " golang
-Plug 'fatih/vim-go', {'for' : 'go'}
-Plug 'vim-jp/vim-go-extra', {'for' : 'go'}
-Plug 'nsf/gocode', {'for' : 'go', 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'dgryski/vim-godef', {'for' : 'go', 'rtp' : $GOPATH . '/src/github.com/nsf/gocode/vim'}
+" Plug 'fatih/vim-go', {'for' : 'go'}
+" Plug 'vim-jp/vim-go-extra', {'for' : 'go'}
+" Plug 'nsf/gocode', {'for' : 'go', 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+" Plug 'dgryski/vim-godef', {'for' : 'go', 'rtp' : $GOPATH . '/src/github.com/nsf/gocode/vim'}
 
 " toml
 Plug 'cespare/vim-toml',  {'for' : 'toml'}
@@ -211,7 +197,6 @@ Plug 'mopp/autodirmake.vim'
 " local
 Plug '~/src/github.com//violetyk/cake.vim'
 Plug '~/src/github.com//violetyk/iikanji-markdown.vim'
-Plug '~/src/github.com//violetyk/neocomplete-php.vim'
 Plug '~/src/github.com//violetyk/neosnippet-aws-cloud-formation'
 Plug '~/src/github.com//violetyk/neosnippet-cakephp2'
 Plug '~/src/github.com//violetyk/neosnippet-rails', { 'for' : ['ruby', 'rtb', 'slim', 'haml'] }
@@ -254,11 +239,13 @@ set splitbelow
 set splitright
 
 " 補完時、現在選択中の候補の付加情報を表示しない。
-set completeopt-=menu,preview
+" set completeopt-=menu,preview
+set completeopt=menu,menuone,popup
 
 " pasteモードの切り替えマッピング
 set pastetoggle=<Leader>p
 
+let $LANG = 'en'
 " }}}
 
 " Encoding {{{
@@ -347,7 +334,7 @@ set noundofile
 
 " Clipboard {{{
 " クリップボードの共有
-set clipboard+=unnamedplus,unnamed
+ set clipboard+=unnamedplus,unnamed
 " }}}
 
 " Search & Completion {{{
@@ -746,165 +733,23 @@ if s:is_plugged('nerdtree') " {{{
   let NERDTreeHijackNetrw = 0
   let NERDTreeAutoCenter = 0
 endif " }}}
-if s:is_plugged('LanguageClient-neovim') " {{{
-  " Required for operations modifying multiple buffers like rename.
-  set hidden
-  set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
-  let g:LanguageClient_serverCommands = {
-        \ 'php': ['php', $XDG_CONFIG_HOME . '/composer/vendor/felixfbecker/language-server/bin/php-language-server.php'],
-        \ }
+if s:is_plugged('asyncomplete.vim') " {{{
+  let g:asyncomplete_auto_popup = 0
 
-  let g:LanguageClient_changeThrottle = 0.1
-  " let g:LanguageClient_selectionUI = 'fzf'
-  " let g:LanguageClient_selectionUI = 'location-list'
-
-  " Disable diagnostics
-  let g:LanguageClient_diagnosticsEnable = 0
-  let g:LanguageClient_autoStart = 1
-
-  let g:LanguageClient_rootMarkers = ['.git', '.github', '.circleci', 'circle.yml', '.editorconfig', 'Gemfile', 'composer.json']
-
-  nnoremap <silent> K :<c-u>call LanguageClient_textDocument_hover()<CR>
-  nnoremap <silent> gd :<c-u>call LanguageClient_textDocument_definition()<CR>
-  " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-  " let g:LanguageClient_windowLogMessageLevel = 'INFO'
-  " let g:LanguageClient_loggingLevel = 'INFO'
-
-
-
-  if s:is_plugged('deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
-
-    augroup PluginDeoplete
-      autocmd!
-      autocmd FileType php setlocal omnifunc=LanguageClient#complete | setlocal completefunc=LanguageClient#complete
-    augroup END
-  endif
-
-endif " }}}
-
-
-
-if s:is_plugged('neocomplete.vim') " {{{
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-  let g:neocomplete#max_list = 30
-  let g:neocomplete#sources#buffer#max_keyword_width = 100
-
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-          \ }
-
-  " completion patterns
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-  if !exists('g:neocomplete#delimiter_patterns')
-    let g:neocomplete#delimiter_patterns= {}
-  endif
-  let g:neocomplete#delimiter_patterns.vim = ['#']
-  let g:neocomplete#delimiter_patterns.ruby = ['::']
-
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.go = '\h\w*\.\?'
-  " let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return neocomplete#smart_close_popup() . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
   endfunction
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-y>  neocomplete#close_popup()
-  inoremap <expr><C-e>  neocomplete#cancel_popup()
-  " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-  " For cursor moving in insert mode(Not recommended)
-  "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-  "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-  "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-  "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-  " Or set this.
-  "let g:neocomplete#enable_cursor_hold_i = 1
-  " Or set this.
-  "let g:neocomplete#enable_insert_char_pre = 1
-
-  " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
-
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-  " Enable omni completion.
-  augroup PluginNeoComplete
-    autocmd!
-
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    if s:is_plugged('jedi.vim')
-      autocmd FileType python setlocal omnifunc=jedi#completions
-    else
-      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    endif
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType gitcommit setlocal omnifunc=github_complete#complete
-    " autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-    autocmd FileType php setlocal omnifunc=
-  augroup END
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-  let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-  " For perlomni.vim setting.
-  " https://github.com/c9s/perlomni.vim
-  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-  let g:neocomplete#force_overwrite_completefunc = 1
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 endif " }}}
+
+
 if s:is_plugged('neosnippet') " {{{
 
   function! s:setup_neosnippets()
@@ -1031,7 +876,7 @@ if s:is_plugged('unite.vim') " {{{
   " nnoremap [unite]h   :<C-u>Unite history/command<CR>
   nnoremap [unite]j   :<C-u>Unite buffer file_mru bookmark -start-insert<CR>
   nnoremap [unite]J   :<C-u>Unite jump<CR>
-  nnoremap [unite]l   :<C-u>Unite line -start-insert -auto-preview -vertical -previewheight=50 -direction=belowright<CR>
+  nnoremap [unite]l   :<C-u>Unite line -start-insert -auto-preview -previewheight=50<CR>
   nnoremap [unite]L   :<C-u>UniteWithCursorWord line -start-insert -auto-preview -previewheight=50 -direction=belowright<CR>
   " nnoremap [unite]L   :<C-u>Unite launcher<CR>
   nnoremap [unite]M   :<C-u>Unite output:messages<CR>
@@ -1361,9 +1206,6 @@ if s:is_plugged('vim-choosewin') " {{{
   let g:choosewin_blink_on_land      = 0 " 頼むから着地時にカーソル点滅をさせないでくれ！
   let g:choosewin_statusline_replace = 0 " どうかステータスラインリプレイスしないで下さい!
   let g:choosewin_tabline_replace    = 0 " どうかタブラインもリプレイスしないでいただきたい！
-endif " }}}
-if s:is_plugged('neocomplete-php.vim') " {{{
-  let g:neocomplete_php_locale = 'ja'
 endif " }}}
 " if s:is_plugged('github-issues.vim') " {{{
   " let g:github_upstream_issues = 1
