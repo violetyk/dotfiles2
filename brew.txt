@@ -17,8 +17,12 @@ fd
 openssl
 universal-ctags/universal-ctags/universal-ctags --HEAD
 ricty --with-powerline
-direnv
 coreutils
 nkf
 composer
 redis
+direnv
+pipenv
+pyenv
+rbenv
+bat
