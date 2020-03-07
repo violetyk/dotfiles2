@@ -20,9 +20,6 @@ call plug#begin(s:plugin_dir)
 " base
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'vim-jp/vimdoc-ja'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neossh.vim'
 Plug 'kana/vim-gf-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-metarw'
@@ -67,7 +64,11 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 
+" snippet
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " filer
 Plug 'scrooloose/nerdtree'
@@ -197,9 +198,6 @@ Plug 'mopp/autodirmake.vim'
 " local
 Plug '~/src/github.com//violetyk/cake.vim'
 Plug '~/src/github.com//violetyk/iikanji-markdown.vim'
-Plug '~/src/github.com//violetyk/neosnippet-aws-cloud-formation'
-Plug '~/src/github.com//violetyk/neosnippet-cakephp2'
-Plug '~/src/github.com//violetyk/neosnippet-rails', { 'for' : ['ruby', 'rtb', 'slim', 'haml'] }
 Plug '~/src/github.com//violetyk/scratch-utility'
 
 call plug#end()
@@ -495,8 +493,8 @@ nnoremap gs :vertical wincmd f<CR>
 " nnoremap <C-]> g<C-]><Space>
 
 " 移動量の調節
-nnoremap <C-e> 10<C-e>
-nnoremap <C-y> 10<C-y>
+" nnoremap <C-e> 10<C-e>
+" nnoremap <C-y> 10<C-y>
 " }}}
 
 " 検索操作 {{{
@@ -733,64 +731,42 @@ if s:is_plugged('nerdtree') " {{{
   let NERDTreeHijackNetrw = 0
   let NERDTreeAutoCenter = 0
 endif " }}}
-
 if s:is_plugged('asyncomplete.vim') " {{{
-  let g:asyncomplete_auto_popup = 0
+  " let g:asyncomplete_auto_popup = 1
 
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction
+  " function! s:check_back_space() abort
+    " let col = col('.') - 1
+    " return !col || getline('.')[col - 1]  =~ '\s'
+  " endfunction
 
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ asyncomplete#force_refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  " inoremap <silent><expr> <TAB>
+        " \ pumvisible() ? "\<C-n>" :
+        " \ <SID>check_back_space() ? "\<TAB>" :
+        " \ asyncomplete#force_refresh()
+  " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+endif " }}}
+if s:is_plugged('asyncomplete-ultisnips.vim') " {{{
+  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
 endif " }}}
 
+if s:is_plugged('ultisnips') " {{{
+  " let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsExpandTrigger="<c-k>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-if s:is_plugged('neosnippet') " {{{
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
 
-  function! s:setup_neosnippets()
-    if exists('b:rails_root')
-      let dirs = [
-            \ $HOME.'/src/github.com/violetyk/neosnippet-rails/neosnippets',
-            \]
-      nnoremap <buffer><silent><expr> <Space>es ':NeoSnippetEdit -split -vertical ' . &filetype . '/'. RailsFileType()
-    elseif index(['php', 'ctp'], &filetype) != -1
-      let dirs = [
-            \ $HOME.'/src/github.com/violetyk/neosnippet-cakephp2/neosnippets',
-            \]
-      nnoremap <buffer><silent> <Space>es :NeoSnippetEdit -split -vertical<space>
-    else
-      let dirs = [
-            \ $HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
-            \]
-      nnoremap <buffer><silent><expr> <Space>es ':NeoSnippetEdit -split -vertical ' . &filetype . '.snip'
-    endif
+  let g:UltiSnipsSnippetDirectories = [
+        \ 'UltiSnips',
+        \ $HOME . '/.vim/UltiSnips',
+        \ ]
 
-    let g:neosnippet#snippets_directory = dirs
-  endfunction
-
-  augroup neosnippet_set_directory
-    autocmd!
-    autocmd BufEnter * call s:setup_neosnippets()
-  augroup END
-
-  nnoremap <silent> <Space>rs  :<C-u>NeoSnippetSource<Space>
-
-
-  " Plugin key-mappings.
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  xmap <C-l> <Plug>(neosnippet_start_unite_snippet_target)
-
-  " For snippet_complete marker.
-  " if has('conceal')
-    " set conceallevel=2 concealcursor=i
-  " endif
 endif " }}}
 if s:is_plugged('unite.vim') " {{{
   " To track long mru history.
@@ -1206,19 +1182,6 @@ if s:is_plugged('vim-choosewin') " {{{
   let g:choosewin_blink_on_land      = 0 " 頼むから着地時にカーソル点滅をさせないでくれ！
   let g:choosewin_statusline_replace = 0 " どうかステータスラインリプレイスしないで下さい!
   let g:choosewin_tabline_replace    = 0 " どうかタブラインもリプレイスしないでいただきたい！
-endif " }}}
-" if s:is_plugged('github-issues.vim') " {{{
-  " let g:github_upstream_issues = 1
-  " let g:gissues_default_remote = 'github'
-" endif " }}}
-if s:is_plugged('github-complete.vim') " {{{
-  let g:github_complete_enable_neocomplete = 1
-  let g:github_complete_enable_emoji_completion = 1
-  let g:github_complete_enable_issue_completion = 1
-  let g:github_complete_enable_user_completion = 1
-  let g:github_complete_enable_repo_completion = 1
-  let g:github_complete_emoji_japanese_workaround = 1
-
 endif " }}}
 if s:is_plugged('jedi.vim') " {{{
   let g:jedi#completions_enabled = 0
