@@ -29,6 +29,9 @@ Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-localrc'
 
 " unite
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
 Plug 'Shougo/unite.vim'
 Plug 'ujihisa/unite-colorscheme'
 Plug 'ujihisa/unite-locate'
@@ -752,7 +755,6 @@ if s:is_plugged('asyncomplete-ultisnips.vim') " {{{
         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
         \ }))
 endif " }}}
-
 if s:is_plugged('ultisnips') " {{{
   " let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsExpandTrigger="<c-e>"
@@ -768,6 +770,20 @@ if s:is_plugged('ultisnips') " {{{
         \ ]
 
 endif " }}}
+if s:is_plugged('fzf.vim')
+  " An action can be a reference to a function that processes selected lines
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
+
+  let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit' }
+endif
 if s:is_plugged('unite.vim') " {{{
   " To track long mru history.
   let g:unite_source_file_mru_long_limit = 3000
