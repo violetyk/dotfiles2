@@ -755,9 +755,9 @@ endif " }}}
 
 if s:is_plugged('ultisnips') " {{{
   " let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsExpandTrigger="<c-k>"
-  let g:UltiSnipsJumpForwardTrigger="<c-b>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  let g:UltiSnipsJumpForwardTrigger="<c-e>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-y>"
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
