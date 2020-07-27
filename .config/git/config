@@ -1,6 +1,7 @@
 [user]
   name = violetyk
   email = yuhei.kagaya@gmail.com
+	signingkey = 5D17EF68687A095B4AED6146D21728C7CD018AE1
 
 [include]
   path = .gitconfig.local
@@ -111,3 +112,7 @@
 	smudge = git-lfs smudge -- %f
 	required = true
 	process = git-lfs filter-process
+[gpg]
+	program = /usr/local/bin/gpg
+[commit]
+	gpgsign = true

@@ -28,11 +28,15 @@ set -U fish_user_paths $HOME/bin $fish_user_paths
 set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
 set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
 set -U fish_user_paths /usr/local/opt/php@7.3/bin $fish_user_paths
-set -U fish_user_paths /usr/local/opt/openssl/bin $fish_user_paths
+# set -U fish_user_paths /usr/local/opt/openssl/bin $fish_user_paths
+set -U fish_user_paths /usr/local/opt/openssl@1.1/bin $fish_user_paths
 
-set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
-set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
+# set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
+# set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
+# set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
+set -gx LDFLAGS "-L/usr/local/opt/openssl@1.1/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/openssl@1.1/include"
+set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
 if test -f ~/.config.local/fish/conf.d/local.fish

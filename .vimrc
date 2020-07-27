@@ -128,10 +128,7 @@ Plug 'tpope/vim-dispatch', {'for' : 'ruby'}
 Plug 'thoughtbot/vim-rspec', {'for' : 'ruby'}
 
 " golang
-" Plug 'fatih/vim-go', {'for' : 'go'}
-" Plug 'vim-jp/vim-go-extra', {'for' : 'go'}
-" Plug 'nsf/gocode', {'for' : 'go', 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-" Plug 'dgryski/vim-godef', {'for' : 'go', 'rtp' : $GOPATH . '/src/github.com/nsf/gocode/vim'}
+Plug 'mattn/vim-goimports'
 
 " toml
 Plug 'cespare/vim-toml',  {'for' : 'toml'}
@@ -241,7 +238,7 @@ set splitright
 
 " 補完時、現在選択中の候補の付加情報を表示しない。
 " set completeopt-=menu,preview
-set completeopt=menu,menuone,popup
+set completeopt=menuone,noselect
 
 " pasteモードの切り替えマッピング
 set pastetoggle=<Leader>p
@@ -735,18 +732,18 @@ if s:is_plugged('nerdtree') " {{{
   let NERDTreeAutoCenter = 0
 endif " }}}
 if s:is_plugged('asyncomplete.vim') " {{{
-  " let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_popup = 1
 
-  " function! s:check_back_space() abort
-    " let col = col('.') - 1
-    " return !col || getline('.')[col - 1]  =~ '\s'
-  " endfunction
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
 
-  " inoremap <silent><expr> <TAB>
-        " \ pumvisible() ? "\<C-n>" :
-        " \ <SID>check_back_space() ? "\<TAB>" :
-        " \ asyncomplete#force_refresh()
-  " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 endif " }}}
 if s:is_plugged('asyncomplete-ultisnips.vim') " {{{
   call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
