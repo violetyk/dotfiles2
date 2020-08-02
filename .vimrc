@@ -707,6 +707,23 @@ function! s:is_plugged(name)
   endif
 endfunction
 
+if s:is_plugged('vim-lsp') " {{{
+  let g:lsp_signs_enabled = 0
+  let g:lsp_highlights_enabled = 0
+  let g:lsp_textprop_enabled = 0
+
+  set omnifunc=lsp#complete
+  if exists('+tagfunc') | set tagfunc=lsp#tagfunc | endif
+
+  nmap gd <plug>(lsp-peek-definition)
+  nmap gD <plug>(lsp-definition)
+  nmap gh <plug>(lsp-hover)
+  nmap gr <plug>(lsp-references)
+  nmap gt <plug>(lsp-peek-type-definition)
+  nmap gT <plug>(lsp-type-definition)
+endif
+" }}}
+
 if s:is_plugged('nerdcommenter') " {{{
   "未対応ファイルタイプのエラーメッセージを表示しない
   let NERDShutUp=1
@@ -1130,8 +1147,8 @@ endif " }}}
 if s:is_plugged('vim-gitgutter') " {{{
   let g:gitgutter_enabled = 1
   let g:gitgutter_realtime = 0
-  nmap gj <Plug>GitGutterNextHunk
-  nmap gk <Plug>GitGutterPrevHunk
+  nmap gj <Plug>(GitGutterNextHunk)
+  nmap gk <Plug>(GitGutterPrevHunk)
   nnoremap <Leader>gg :<C-u>GitGutterToggle<CR>
   nnoremap <Leader>gh :<C-u>GitGutterLineHighlightsToggle<CR>
 endif " }}}
