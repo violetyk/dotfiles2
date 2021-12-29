@@ -17,4 +17,7 @@
 # vim-lsp-settings
 .config/configstore/update-notifier-npm.json
 
+# iterm2
+.config/iterm2
+
 !.gitkeep

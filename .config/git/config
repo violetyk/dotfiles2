@@ -1,6 +1,6 @@
 [user]
-  name = violetyk
-  email = yuhei.kagaya@gmail.com
+	name = violetyk
+	email = yuhei.kagaya@gmail.com
 	signingkey = 5D17EF68687A095B4AED6146D21728C7CD018AE1
 
 [include]
@@ -116,3 +116,5 @@
 	program = /usr/local/bin/gpg
 [commit]
 	gpgsign = true
+[github]
+	user = violetyk
