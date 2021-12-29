@@ -28,3 +28,5 @@ rbenv
 bat
 nodebrew
 yarn --ignore-dependencies
+watch
+glow

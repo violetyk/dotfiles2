@@ -81,7 +81,8 @@ Plug 'majutsushi/tagbar'
 
 " ctags support
 Plug 'vim-php/tagbar-phpctags.vim'
-Plug 'jszakmeister/markdown2ctags', {'rtp': ''}
+" Plug 'jszakmeister/markdown2ctags', {'rtp': ''}
+Plug 'jszakmeister/markdown2ctags'
 
 " database
 Plug 'vim-scripts/dbext.vim'
@@ -104,6 +105,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'takahirojin/gbr.vim'
+Plug 'mattn/vim-gist'
 
 " reference
 Plug 'rizzatti/dash.vim'
@@ -156,6 +158,7 @@ Plug 'clausreinke/typescript-tools.vim', { 'do': 'npm install' }
 Plug 'davidhalter/jedi-vim', {'for' : 'python'}
 Plug 'sophacles/vim-bundle-mako', {'for' : 'mako'}
 Plug 'hynek/vim-python-pep8-indent', {'for' : 'python'}
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
 " syntax checking
 " Plug 'scrooloose/syntastic'
@@ -167,9 +170,9 @@ Plug 'itchyny/lightline.vim'
 "Plug 'mrkn/mrkn256.vim'
 "Plug 'w0ng/vim-hybrid'
 "Plug 'tomasr/molokai'
-"Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
-"Plug 'ayu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim'
 
 " html
 Plug 'othree/html5.vim'
@@ -711,19 +714,20 @@ if s:is_plugged('vim-lsp') " {{{
   let g:lsp_signs_enabled = 0
   let g:lsp_highlights_enabled = 0
   let g:lsp_textprop_enabled = 0
+  let g:lsp_diagnostics_echo_cursor = 1
 
   set omnifunc=lsp#complete
   if exists('+tagfunc') | set tagfunc=lsp#tagfunc | endif
 
   nmap gd <plug>(lsp-peek-definition)
   nmap gD <plug>(lsp-definition)
-  nmap gh <plug>(lsp-hover)
+  nmap g<Return> <plug>(lsp-hover)
   nmap gr <plug>(lsp-references)
   nmap gt <plug>(lsp-peek-type-definition)
   nmap gT <plug>(lsp-type-definition)
+  nmap gq <plug>(lsp-document-diagnostics)
 endif
 " }}}
-
 if s:is_plugged('nerdcommenter') " {{{
   "未対応ファイルタイプのエラーメッセージを表示しない
   let NERDShutUp=1
@@ -784,7 +788,7 @@ if s:is_plugged('ultisnips') " {{{
         \ ]
 
 endif " }}}
-if s:is_plugged('fzf.vim')
+if s:is_plugged('fzf.vim') " {{{
   " An action can be a reference to a function that processes selected lines
   function! s:build_quickfix_list(lines)
     call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -797,7 +801,7 @@ if s:is_plugged('fzf.vim')
         \ 'ctrl-t': 'tab split',
         \ 'ctrl-x': 'split',
         \ 'ctrl-v': 'vsplit' }
-endif
+endif " }}}
 if s:is_plugged('unite.vim') " {{{
   " To track long mru history.
   let g:unite_source_file_mru_long_limit = 3000
@@ -1267,6 +1271,10 @@ if s:is_plugged('php-doc-modded') "{{{
   let g:pdv_cfg_annotation_Author = 0
   let g:pdv_cfg_annotation_Copyright = 0
   let g:pdv_cfg_annotation_License = 0
+endif
+" }}}
+if s:is_plugged('vim-pydocstring') "{{{
+  let g:pydocstring_formatter = 'google'
 endif
 " }}}
 

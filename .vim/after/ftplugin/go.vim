@@ -1,11 +1,11 @@
 setlocal  path+=$GOPATH/src/**
-let g:gofmt_command = 'goimports'
+" let g:gofmt_command = 'goimports'
 
 augroup Golang
   autocmd!
-  autocmd BufWritePre *.go Fmt
+  " autocmd BufWritePre *.go Fmt
   autocmd BufNewFile,BufRead *.go setlocal sw=2 noexpandtab ts=2 completeopt=menu,preview
-  autocmd FileType go compiler go | let g:neocomplete#enable_auto_close_preview = 0
+  " autocmd FileType go compiler go | let g:neocomplete#enable_auto_close_preview = 0
 augroup END
 
 let g:tagbar_type_go = {
