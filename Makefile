@@ -14,3 +14,7 @@ deploy:
 
 install:
 	@$(foreach val, $(wildcard ./etc/init/$(ROLE).sh), bash $(val);)
+
+
+update:
+	@$(foreach val, $(wildcard ./etc/init/$(ROLE).sh), bash $(val);)

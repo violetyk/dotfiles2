@@ -6,8 +6,10 @@ fi
 
 # for ricty
 brew tap sanemat/font
-
 cat ./brew.txt | grep -v "^#" | xargs brew install
+
+# for NerdFont
+brew tap homebrew/cask-fonts
 cat ./brew_cask.txt | grep -v "^#" | xargs brew cask install
 
 brew upgrade

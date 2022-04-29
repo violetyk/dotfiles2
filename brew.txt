@@ -30,3 +30,5 @@ nodebrew
 yarn --ignore-dependencies
 watch
 glow
+ngrep
+starship

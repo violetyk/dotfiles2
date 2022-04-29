@@ -1,3 +1,4 @@
 alacritty
 ngrok
 graphql-playground
+font-fira-code-nerd-font

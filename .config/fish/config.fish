@@ -4,19 +4,27 @@ set -x VISUAL vim
 # set -x XDG_CONFIG_HOME ~/.config.local
 set -x XDG_CONFIG_DIRS $HOME/.config.local:$HOME/.config
 
-set -g fisher_path ~/.config.local/fisher
+set -g fish_local_path $HOME/.config.local/fish
+set -g fisher_path $HOME/.config.local/fisher
 
-set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
-set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
+set fish_function_path \
+  $fish_function_path[1] \
+  $fish_local_path/functions \
+  $fisher_path/functions \
+  $fish_function_path[2..-1]
+
+set fish_complete_path \
+  $fish_complete_path[1] \
+  $fish_local_path/completions \
+  $fisher_path/completions \
+  $fish_complete_path[2..-1]
 
 for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
 
 if not functions -q fisher
-    curl -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs git.io/fisherman
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-    fish -c fisher
+    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 end
 
 set fish_user_paths /usr/local/bin
@@ -39,9 +47,9 @@ set -gx CPPFLAGS "-I/usr/local/opt/openssl@1.1/include"
 set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
-if test -f ~/.config.local/fish/conf.d/local.fish
-   and test -r ~/.config.local/fish/conf.d/local.fish
-   source ~/.config.local/fish/conf.d/local.fish
+if test -f $fish_local_path/conf.d/local.fish
+   and test -r $fish_local_path/conf.d/local.fish
+   source $fish_local_path/conf.d/local.fish
 end
 
 # rbenv
@@ -111,40 +119,36 @@ if status --is-interactive
   abbr --add 'reload' 'exec $SHELL -l'
 end
 
+
 # ip
 alias ip 'dig +short myip.opendns.com @resolver1.opendns.com'
-funcsave ip
+funcsave ip -q -d $fish_local_path/functions
 
 alias localip 'ipconfig getifaddr en0'
-funcsave localip
+funcsave localip -q -d $fish_local_path/functions
 
 alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-funcsave ips
-
+funcsave ips -q -d $fish_local_path/functions
 
 # view HTTP traffic
 alias sniff "sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-funcsave sniff
+funcsave sniff -q -d $fish_local_path/functions
 
 alias httpdump "sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-funcsave httpdump
-
+funcsave httpdump -q -d $fish_local_path/functions
 
 # mac
 alias finder_show_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-funcsave finder_show_hidden_files 
+funcsave finder_show_hidden_files -q -d $fish_local_path/functions
 
 alias finder_hide_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-funcsave finder_hide_hidden_files 
+funcsave finder_hide_hidden_files -q -d $fish_local_path/functions
 
 alias desktop_hide "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-funcsave desktop_hide
+funcsave desktop_hide -q -d $fish_local_path/functions
 
 alias desktop_show "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-funcsave desktop_show
+funcsave desktop_show -q -d $fish_local_path/functions
 
-alias kill_chrome "ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-funcsave kill_chrome
 
-alias afk "/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-funcsave afk
+starship init fish | source
