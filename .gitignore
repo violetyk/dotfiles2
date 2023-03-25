@@ -14,10 +14,9 @@
 .ipython/profile_default/security
 .ipython/profile_default/history.sqlite
 
-# vim-lsp-settings
-.config/configstore/update-notifier-npm.json
-
 # iterm2
 .config/iterm2
+
+.config/configstore
 
 !.gitkeep
