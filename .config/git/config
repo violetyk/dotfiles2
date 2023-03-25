@@ -1,7 +1,7 @@
 [user]
   name = violetyk
   email = yuhei.kagaya@gmail.com
-  signingkey = 5D17EF68687A095B4AED6146D21728C7CD018AE1
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnc7YH8jnOsLr9yCxm8dGJDHeMjZxcNu0LIq5FJctb1
 
 [include]
   path = .gitconfig.local
@@ -86,8 +86,8 @@
 
 
 [core]
-  editor = /usr/local/bin/vim -c \"set fenc=utf-8\"
-	autoCRLF = false
+  editor = vim -c \"set fenc=utf-8\"
+  autoCRLF = false
 
 [diff]
   tool = /usr/local/bin/vimdiff
@@ -108,13 +108,15 @@
 [ghq]
   root = ~/src
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 [gpg]
-	program = /usr/local/bin/gpg
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [commit]
-	gpgsign = true
+  gpgsign = true
 [github]
-	user = violetyk
+  user = violetyk
