@@ -26,9 +26,10 @@ pipenv
 pyenv
 rbenv
 bat
-nodebrew
-yarn --ignore-dependencies
 watch
 glow
 ngrep
 starship
+nodebrew
+nodenv
+yarn --ignore-dependencies

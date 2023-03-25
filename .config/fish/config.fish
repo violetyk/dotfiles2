@@ -33,7 +33,7 @@ set -U fish_user_paths /sbin $fish_user_paths
 set -U fish_user_paths /usr/local/bin $fish_user_paths
 set -U fish_user_paths /usr/local/sbin $fish_user_paths
 set -U fish_user_paths $HOME/bin $fish_user_paths
-set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
+# set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
 set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
 set -U fish_user_paths /usr/local/opt/php@7.3/bin $fish_user_paths
 # set -U fish_user_paths /usr/local/opt/openssl/bin $fish_user_paths
@@ -60,6 +60,11 @@ end
 # pyenv
 if type -q pyenv
   pyenv init - | source
+end
+
+# nodenv
+if type -q nodenv
+  nodenv init - | source
 end
 
 
