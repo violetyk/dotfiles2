@@ -2,7 +2,5 @@
 my dotfiles.
 
 ```sh
-$ make install
-$ make deploy
+$ make help
 ```
-
