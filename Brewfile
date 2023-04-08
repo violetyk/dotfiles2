@@ -35,7 +35,7 @@ brew "wget"
 brew "yarn", args: ["ignore-dependencies"]
 cask "alacritty"
 cask "docker"
-cask "font-ricty-diminished"
+cask "font-hack-nerd-font"
 cask "graphql-playground"
 cask "jetbrains-toolbox"
 cask "ngrok"

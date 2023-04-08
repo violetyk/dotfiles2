@@ -1,7 +1,6 @@
 set -x LANG ja_JP.UTF-8
 set -x EDITOR vim
 set -x VISUAL vim
-# set -x XDG_CONFIG_HOME ~/.config.local
 set -x XDG_CONFIG_DIRS $HOME/.config.local:$HOME/.config
 
 set -g fish_local_path $HOME/.config.local/fish
@@ -23,34 +22,24 @@ for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
 
-if not functions -q fisher
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+set fish_user_paths
+if test (uname -m) = "arm64"
+  set -U fish_user_paths /opt/homebrew/bin $fish_user_paths
+  set -U fish_user_paths /opt/homebrew/sbin $fish_user_paths
 end
-
-set fish_user_paths /usr/local/bin
 set -U fish_user_paths /bin $fish_user_paths
 set -U fish_user_paths /sbin $fish_user_paths
 set -U fish_user_paths /usr/local/bin $fish_user_paths
 set -U fish_user_paths /usr/local/sbin $fish_user_paths
 set -U fish_user_paths $HOME/bin $fish_user_paths
-# set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
-set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
-set -U fish_user_paths /usr/local/opt/php@7.3/bin $fish_user_paths
-# set -U fish_user_paths /usr/local/opt/openssl/bin $fish_user_paths
-set -U fish_user_paths /usr/local/opt/openssl@1.1/bin $fish_user_paths
-
-# set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
-# set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
-# set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
-set -gx LDFLAGS "-L/usr/local/opt/openssl@1.1/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/openssl@1.1/include"
-set -gx PKG_CONFIG_PATH "/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
 if test -f $fish_local_path/conf.d/local.fish
    and test -r $fish_local_path/conf.d/local.fish
    source $fish_local_path/conf.d/local.fish
 end
+
+set -x SHELL /opt/homebrew/bin/fish
 
 # rbenv
 if type -q rbenv
