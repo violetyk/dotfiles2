@@ -39,8 +39,6 @@ if test -f $fish_local_path/conf.d/local.fish
    source $fish_local_path/conf.d/local.fish
 end
 
-set -x SHELL /opt/homebrew/bin/fish
-
 # rbenv
 if type -q rbenv
   rbenv init - | source
@@ -143,6 +141,9 @@ funcsave desktop_hide -q -d $fish_local_path/functions
 
 alias desktop_show "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 funcsave desktop_show -q -d $fish_local_path/functions
+
+alias grep 'ggrep'
+alias xargs 'gxargs'
 
 
 starship init fish | source
