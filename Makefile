@@ -5,6 +5,8 @@ DOTFILES_TARGET   := $(wildcard .??*)
 DOTFILES_DIR      := $(PWD)
 DOTFILES_FILES    := $(filter-out $(DOTFILES_EXCLUDES), $(DOTFILES_TARGET))
 HOME_DIRS         := bin tmp swap undo backup tags src .config.local
+TMUX_PLUGIN_DIR   := $(HOME)/.tmux/plugins/tpm
+TMP_DIR           := $(shell mktemp -d)
 
 .PHONY: help
 .DEFAULT_GOAL := help
@@ -28,6 +30,17 @@ fish: ## fishの設定
 	fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 	fish -c fisher update
 	fish -c fish_update_completions
+
+.PHONY: tmux
+tmux: ## tmuxの設定
+	if [ ! -d $(TMUX_PLUGIN_DIR) ]; then\
+		git clone https://github.com/tmux-plugins/tpm $(TMUX_PLUGIN_DIR);\
+	fi
+	cd $(TMUX_PLUGIN_DIR)
+	git pull
+	$(HOMEBREW_PREFIX)/opt/ncurses/bin/infocmp tmux-256color > $(TMP_DIR)/tmux-256color.info
+	tic -xe  tmux-256color $(TMP_DIR)/tmux-256color.info
+	infocmp tmux-256color
 
 .PHONY: dircolors
 dircolors: ## .dircolorsの更新

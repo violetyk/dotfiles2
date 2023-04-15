@@ -173,6 +173,7 @@ Plug 'itchyny/lightline.vim'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'nordtheme/vim'
 
 " html
 Plug 'othree/html5.vim'
@@ -428,14 +429,21 @@ set cmdheight=2
 
 syntax enable
 
-" カラースキーマの指定
+" TrueColor対応
 set termguicolors
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" カラースキーマの指定
 " let ayucolor="light"
 " let ayucolor="mirage"
 " let ayucolor="dark"
 " silent! colorscheme ayu
 silent! colorscheme jellybeans
 " silent! colorscheme mrkn256
+" silent! colorscheme nord
 
 " }}}
 

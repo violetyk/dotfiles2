@@ -101,6 +101,9 @@ if status --is-interactive
   # mysql
   abbr --add 'mysql' "env EDITOR=\"vim -c ':set ft=sql'\" mysql --auto-rehash --pager='less -S'"
 
+  # ssh
+  abbr --add 'ssh' 'env TERM=xterm-256color ssh'
+
   # trim and pbcopy
   abbr --add 'trim_pbcopy' "tr -d '\n' | pbcopy"
 

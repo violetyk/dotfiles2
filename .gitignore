@@ -22,4 +22,7 @@ package-lock.json
 
 .config/configstore
 
+# neofetch
+.config/neofetch/
+
 !.gitkeep
