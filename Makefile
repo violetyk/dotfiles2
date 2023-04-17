@@ -37,9 +37,10 @@ tmux: ## tmuxの設定
 	# tpmの設定
 	#
 	if [ ! -d $(TMUX_PLUGIN_DIR) ]; then\
-		git clone https://github.com/tmux-plugins/tpm $(TMUX_PLUGIN_DIR);\
+		git clone https://github.com/tmux-plugins/tpm $(TMUX_PLUGIN_DIR)/tpm;\
 	fi
 	cd $(TMUX_PLUGIN_DIR)/tpm; git pull
+	$(TMUX_PLUGIN_DIR)/tpm/tpm
 	$(TMUX_PLUGIN_DIR)/tpm/bin/install_plugins
 	$(TMUX_PLUGIN_DIR)/tpm/bin/clean_plugins
 	#
