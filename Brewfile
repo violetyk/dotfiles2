@@ -40,6 +40,7 @@ brew "wget"
 brew "yarn", args: ["ignore-dependencies"]
 cask "alacritty"
 cask "docker"
+cask "firefox"
 cask "font-hack-nerd-font"
 cask "graphql-playground"
 cask "jetbrains-toolbox"
