@@ -120,3 +120,5 @@
   gpgsign = true
 [github]
   user = violetyk
+[init]
+	defaultBranch = main

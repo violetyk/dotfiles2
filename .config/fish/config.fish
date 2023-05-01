@@ -148,5 +148,6 @@ funcsave desktop_show -q -d $fish_local_path/functions
 alias grep 'ggrep'
 alias xargs 'gxargs'
 
+alias tig 'env TERM=xterm-256color tig'
 
 starship init fish | source
