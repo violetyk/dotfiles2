@@ -122,3 +122,5 @@
   user = violetyk
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false

@@ -34,6 +34,7 @@ brew "rust"
 brew "starship"
 brew "tig"
 brew "tmux"
+brew "tree"
 brew "universal-ctags"
 brew "vim", args: ["HEAD"]
 brew "watch"
