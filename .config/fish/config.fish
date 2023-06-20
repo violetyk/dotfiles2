@@ -22,16 +22,16 @@ for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
 
-set fish_user_paths
+# set fish_user_paths
 if test (uname -m) = "arm64"
-  set -U fish_user_paths /opt/homebrew/bin $fish_user_paths
-  set -U fish_user_paths /opt/homebrew/sbin $fish_user_paths
+  fish_add_path /opt/homebrew/bin
+  fish_add_path /opt/homebrew/sbin
+else
+  fish_add_path /usr/local/bin
+  fish_add_path /usr/local/sbin
 end
-set -U fish_user_paths /bin $fish_user_paths
-set -U fish_user_paths /sbin $fish_user_paths
-set -U fish_user_paths /usr/local/bin $fish_user_paths
-set -U fish_user_paths /usr/local/sbin $fish_user_paths
-set -U fish_user_paths $HOME/bin $fish_user_paths
+
+fish_add_path $HOME/bin
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
 if test -f $fish_local_path/conf.d/local.fish
