@@ -39,6 +39,12 @@ if test -f $fish_local_path/conf.d/local.fish
    source $fish_local_path/conf.d/local.fish
 end
 
+# op
+if test -f $HOME/.config/op/plugins.sh
+   and test -r $HOME/.config/op/plugins.sh
+   source $HOME/.config/op/plugins.sh
+end
+
 # rbenv
 if type -q rbenv
   rbenv init - | source

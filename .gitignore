@@ -25,4 +25,7 @@ package-lock.json
 # neofetch
 .config/neofetch/
 
+# 1Password CLI
+.config/op/
+
 !.gitkeep
