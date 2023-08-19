@@ -7,6 +7,7 @@ DOTFILES_FILES    := $(filter-out $(DOTFILES_EXCLUDES), $(DOTFILES_TARGET))
 HOME_DIRS         := bin tmp swap undo backup tags src .config.local
 TMUX_PLUGIN_DIR   := $(HOME)/.tmux/plugins
 TMP_DIR           := $(shell mktemp -d)
+PATH              := /opt/homebrew/bin:$(PATH)
 
 .PHONY: help
 .DEFAULT_GOAL := help
