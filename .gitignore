@@ -1,19 +1,21 @@
 Brewfile.lock.json
 package-lock.json
 
-.config/
 
 # alacritty
 !.config/alacritty/alacritty.yml
 
 # fish
 !.config/fish/
-!.config/fish/fish_variables
 
 # git
 !.config/git/config
 !.config/git/ignore
 
+!.config/pycodestyle
+
+.config/fish/fish_variables
+.config/
 
 # vim
 .vim/bundle
@@ -27,6 +29,5 @@ package-lock.json
 .ipython/profile_default/security
 .ipython/profile_default/history.sqlite
 
-!.config/pycodestyle
 
 !.gitkeep
