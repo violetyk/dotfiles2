@@ -1,21 +1,8 @@
 Brewfile.lock.json
 package-lock.json
 
-
-# alacritty
-!.config/alacritty/alacritty.yml
-
 # fish
-!.config/fish/
-
-# git
-!.config/git/config
-!.config/git/ignore
-
-!.config/pycodestyle
-
 .config/fish/fish_variables
-.config/
 
 # vim
 .vim/bundle
@@ -29,5 +16,28 @@ package-lock.json
 .ipython/profile_default/security
 .ipython/profile_default/history.sqlite
 
+# iterm2
+.config/iterm2
+
+# configstore
+.config/configstore/
+
+# neofetch
+.config/neofetch/
+
+# 1Password
+.config/1Password/
+
+# 1Password CLI
+.config/op/
+
+# GitHub Copilot
+.config/github-copilot/
+
+# JetBrains
+.config/jgit/
+
+# composer
+.config/composer/
 
 !.gitkeep
