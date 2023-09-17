@@ -719,9 +719,10 @@ function! s:is_plugged(name)
 endfunction
 
 if s:is_plugged('vim-lsp') " {{{
-  let g:lsp_signs_enabled = 0
-  let g:lsp_highlights_enabled = 0
-  let g:lsp_textprop_enabled = 0
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_signs_enabled = 1
+  let g:lsp_diagnostics_virtual_text_enabled = 0
+  let g:lsp_diagnostics_float_cursor = 1
   let g:lsp_diagnostics_echo_cursor = 1
 
   set omnifunc=lsp#complete
