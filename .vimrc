@@ -56,11 +56,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'osyo-manga/vim-over'
 Plug 'AndrewRadev/switch.vim'
 
-" text objects
-Plug 'akiyan/vim-textobj-php', { 'for' : ['php', 'ctp', 'html'] }
-Plug 'akiyan/vim-textobj-xml-attribute'
-Plug 'rhysd/vim-textobj-ruby', { 'for' : ['ruby', 'rtb', 'slim', 'haml'] }
-
 " completion
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -68,6 +63,8 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+Plug 'github/copilot.vim'
+
 
 " snippet
 Plug 'SirVer/ultisnips'
