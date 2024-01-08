@@ -31,6 +31,9 @@ package-lock.json
 # 1Password CLI
 .config/op/
 
+# gh
+.config/gh/
+
 # GitHub Copilot
 .config/github-copilot/
 

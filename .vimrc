@@ -74,7 +74,7 @@ Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree'
 
 " outliner
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 
 " ctags support
 Plug 'vim-php/tagbar-phpctags.vim'
@@ -134,7 +134,7 @@ Plug 'cespare/vim-toml',  {'for' : 'toml'}
 
 " markdown
 Plug 'godlygeek/tabular', {'for' : ['markdown', 'md']}
-Plug 'kannokanno/previm', {'for' : ['markdown', 'md']}
+Plug 'previm/previm', {'for' : ['markdown', 'md']}
 
 " javascript
 Plug 'marijnh/tern_for_vim', {'for' : 'javascript'}
