@@ -1,4 +1,4 @@
-import = ["/Users/yuheikagaya/src/github.com/alacritty/alacritty-theme/themes/tokyo-night.yaml"]
+import = ["~/src/github.com/alacritty/alacritty-theme/themes/tokyo-night.yaml"]
 
 [env]
 TERM = "alacritty"
