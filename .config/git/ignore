@@ -37,3 +37,4 @@ tags
 .DS_Store
 *.old
 .env.local
+.envrc
