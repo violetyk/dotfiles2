@@ -46,4 +46,7 @@ package-lock.json
 # composer
 .config/yarn/
 
+# rust
+.config/fish/conf.d/rustup.fish
+
 !.gitkeep
