@@ -23,6 +23,9 @@ composer.phar
 setting.local.php
 core.local.php
 
+# mycli
+.myclirc
+
 # debug
 kagaya/
 [Kk]agaya*.php
