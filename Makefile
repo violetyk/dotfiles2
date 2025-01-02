@@ -32,6 +32,12 @@ fish: ## fishの設定
 	fish -c fisher update
 	fish -c fish_update_completions
 
+.PHONY: rust
+rust: ## Rustをインストール
+	if ! which cargo > /dev/null 2>&1; then\
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh;\
+	fi
+
 .PHONY: tmux
 tmux: ## tmuxの設定
 	#
