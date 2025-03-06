@@ -1,0 +1,49 @@
+# fishを使う
+command = /bin/sh -c 'if [ -x /opt/homebrew/bin/fish ]; then exec /opt/homebrew/bin/fish --login --interactive; else exec /usr/bin/fish --login --interactive; fi'
+
+# TERM
+term = xterm-256color
+
+# Mac 赤黄緑ボタンを出す
+macos-non-native-fullscreen = visible-menu
+
+# Ghosttyとシェルの連携機能
+shell-integration = none
+shell-integration-features = no-cursor,sudo,title
+
+# カーソルはブロック、点滅しない
+cursor-style = block
+cursor-style-blink = false
+
+# タイピング中はマウスカーソルを消す
+mouse-hide-while-typing = true
+
+# ウィンドウを閉じるときには実行中のプロセスの有無にかかわらず常に確認ダイアログを表示する
+confirm-close-surface = always
+
+# フォント
+font-family = 'Hack Nerd Font Mono'
+font-size = 12
+font-feature = -calt,-liga,-dlig
+adjust-cell-width = -1
+
+# ターミナルのサイズ変更時にサイズを表示するポップアップを表示しない
+resize-overlay = never
+
+# キーバインド
+keybind = ctrl+t>r=reload_config
+keybind = ctrl+t>z=toggle_split_zoom
+keybind = ctrl+t>enter=toggle_fullscreen
+keybind = ctrl+t>v=new_split:right
+keybind = ctrl+t>s=new_split:down
+keybind = ctrl+t>l=goto_split:right
+keybind = ctrl+t>h=goto_split:left
+keybind = ctrl+t>j=goto_split:down
+keybind = ctrl+t>k=goto_split:up
+
+keybind = ctrl+t>c=new_tab
+keybind = ctrl+t>n=next_tab
+keybind = ctrl+t>p=previous_tab
+keybind = ctrl+t>q=close_tab
+
+# vim: set et fenc=utf-8 ff=unix ft=toml sts=2 sw=2 ts=2 : 

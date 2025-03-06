@@ -47,7 +47,6 @@ brew "watch"
 brew "wget"
 brew "yarn", args: ["ignore-dependencies"]
 cask "1password/tap/1password-cli"
-cask "alacritty"
 cask "docker"
 cask "firefox"
 cask "font-hack-nerd-font"
