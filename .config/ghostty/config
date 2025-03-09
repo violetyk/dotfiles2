@@ -25,7 +25,8 @@ confirm-close-surface = always
 font-family = 'Hack Nerd Font Mono'
 font-size = 12
 font-feature = -calt,-liga,-dlig
-adjust-cell-width = -1
+# adjust-cell-height = -1
+# adjust-cell-width = -1
 
 # ターミナルのサイズ変更時にサイズを表示するポップアップを表示しない
 resize-overlay = never
