@@ -22,8 +22,10 @@ for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
 
+set OS (uname -s)
+
 # set fish_user_paths
-if test (uname -m) = "arm64"
+if test $OS = "Darwin"
   fish_add_path /opt/homebrew/bin
   fish_add_path /opt/homebrew/sbin
 else
@@ -31,7 +33,8 @@ else
   fish_add_path /usr/local/sbin
 end
 
-fish_add_path $HOME/bin
+test -d $HOME/bin; and fish_add_path $HOME/bin
+test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
 if test -f $fish_local_path/conf.d/local.fish
@@ -46,19 +49,13 @@ if test -f $HOME/.config/op/plugins.sh
 end
 
 # rbenv
-if type -q rbenv
-  rbenv init - | source
-end
+type -q rbenv; and rbenv init - | source
 
 # pyenv
-if type -q pyenv
-  pyenv init - | source
-end
+type -q pyenv; and pyenv init - | source
 
 # nodenv
-if type -q nodenv
-  nodenv init - | source
-end
+type -q nodenv; and nodenv init - | source
 
 # direnv
 if type -q direnv
@@ -129,38 +126,33 @@ end
 
 
 # ip
-alias ip 'dig +short myip.opendns.com @resolver1.opendns.com'
-funcsave ip -q -d $fish_local_path/functions
+# alias ip 'dig +short myip.opendns.com @resolver1.opendns.com'
+# funcsave ip -q -d $fish_local_path/functions
 
-alias localip 'ipconfig getifaddr en0'
-funcsave localip -q -d $fish_local_path/functions
+# alias localip 'ipconfig getifaddr en0'
+# funcsave localip -q -d $fish_local_path/functions
 
-alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-funcsave ips -q -d $fish_local_path/functions
+# alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+# funcsave ips -q -d $fish_local_path/functions
 
 # view HTTP traffic
-alias sniff "sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-funcsave sniff -q -d $fish_local_path/functions
+# alias sniff "sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+# funcsave sniff -q -d $fish_local_path/functions
 
-alias httpdump "sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-funcsave httpdump -q -d $fish_local_path/functions
+# alias httpdump "sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+# funcsave httpdump -q -d $fish_local_path/functions
 
 # mac
-alias finder_show_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-funcsave finder_show_hidden_files -q -d $fish_local_path/functions
+if test $OS = "Darwin"
+  alias finder_show_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+  alias finder_hide_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+  alias desktop_hide "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+  alias desktop_show "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-alias finder_hide_hidden_files "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-funcsave finder_hide_hidden_files -q -d $fish_local_path/functions
+  type -q gls; and alias ls 'gls --color=auto $argv'
+  type -q ggrep; and alias grep 'ggrep'
+  type -q gxargs; and alias xargs 'gxargs'
+end
 
-alias desktop_hide "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-funcsave desktop_hide -q -d $fish_local_path/functions
-
-alias desktop_show "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-funcsave desktop_show -q -d $fish_local_path/functions
-
-alias grep 'ggrep'
-alias xargs 'gxargs'
-
-alias tig 'env TERM=xterm-256color tig'
-
-starship init fish | source
+# starship
+type -q starship; and starship init fish | source

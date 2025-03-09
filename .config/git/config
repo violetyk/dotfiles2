@@ -3,9 +3,6 @@
   email = yuhei.kagaya@gmail.com
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnc7YH8jnOsLr9yCxm8dGJDHeMjZxcNu0LIq5FJctb1
 
-[include]
-  path = .gitconfig.local
-
 [color]
   ui = auto
   status = auto
@@ -90,9 +87,6 @@
 [merge]
   tool = /usr/local/bin/vimdiff
 
-[include]
-  path = .gitconfig.sh
-
 [push]
   # default = matching
   default = simple
@@ -109,13 +103,21 @@
   process = git-lfs filter-process
 [gpg]
   format = ssh
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [commit]
   gpgsign = true
 [github]
   user = violetyk
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pull]
-	rebase = false
+  rebase = false
+
+[includeIf "gitdir:/Users/"]
+  path = ~/.config/git/config-mac
+
+[includeIf "gitdir:/home/"]
+  path = ~/.config/git/config-linux
+
+[include]
+  path = .gitconfig.local
+
