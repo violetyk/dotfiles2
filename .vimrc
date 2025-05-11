@@ -65,6 +65,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'github/copilot.vim'
 
+" template
+Plug 'mattn/vim-sonictemplate'
 
 " snippet
 Plug 'SirVer/ultisnips'
@@ -142,9 +144,6 @@ Plug 'pangloss/vim-javascript', {'for' : 'javascript'}
 Plug 'jelera/vim-javascript-syntax', {'for' : 'javascript'}
 Plug 'othree/javascript-libraries-syntax.vim', {'for' : 'javascript'}
 Plug 'elzr/vim-json', {'for' : 'javascript'}
-
-" coffee
-Plug 'kchmck/vim-coffee-script', {'for' : 'coffee'}
 
 " typescript
 Plug 'leafgarland/typescript-vim', {'for' : 'typescript'}
@@ -781,10 +780,10 @@ if s:is_plugged('asyncomplete-ultisnips.vim') " {{{
         \ }))
 endif " }}}
 if s:is_plugged('ultisnips') " {{{
-  " let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsExpandTrigger="<c-e>"
-  let g:UltiSnipsJumpForwardTrigger="<c-e>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-y>"
+  let g:UltiSnipsExpandTrigger="<tab>"
+  " let g:UltiSnipsExpandTrigger="<c-e>"
+  " let g:UltiSnipsJumpForwardTrigger="<c-e>"
+  " let g:UltiSnipsJumpBackwardTrigger="<c-y>"
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
@@ -1203,12 +1202,29 @@ if s:is_plugged('syntastic') " {{{
   cabbrev <silent> bd lclose\|bdelete
 endif " }}}
 if s:is_plugged('vim-quickrun') " {{{
-  let g:quickrun_config = {
-        \   "coffee" : {
-        \     'command': 'coffee',
-        \     'exec': ['%c -cbp %s']
-        \   },
+
+  let g:quickrun_config = {}
+  let g:quickrun_config._ = {
+        \ 'outputter/error/success': 'buffer',
+        \ 'outputter/error/error': 'quickfix',
+        \ 'outputter/quickfix/open_cmd': 'copen',
+        \ 'runner': 'vimproc',
+        \ 'runner/vimproc/updatetime': 60,
+        \ 'hook/time/enable': 1
         \ }
+
+  let g:quickrun_config.python = {
+        \ 'command': '~/.pyenv/shims/python',
+        \ 'cmdopt': '-u'
+        \ }
+
+  let g:quickrun_config.cpp = {
+        \ 'command': 'g++ -std=c++20',
+        \ 'input': 'input',
+        \ 'runner': 'system'
+        \ }
+
+  nnoremap <silent><leader>r :QuickRun<CR>
   nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 endif " }}}
 if s:is_plugged('vim-choosewin') " {{{
