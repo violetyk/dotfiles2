@@ -1219,7 +1219,8 @@ if s:is_plugged('vim-quickrun') " {{{
         \ }
 
   let g:quickrun_config.cpp = {
-        \ 'command': 'g++ -std=c++20',
+        \ 'command': 'g++',
+        \ 'cmdopt': '-std=c++20',
         \ 'input': 'input',
         \ 'runner': 'system'
         \ }
