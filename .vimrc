@@ -781,17 +781,11 @@ if s:is_plugged('asyncomplete-ultisnips.vim') " {{{
 endif " }}}
 if s:is_plugged('ultisnips') " {{{
   let g:UltiSnipsExpandTrigger="<tab>"
-  " let g:UltiSnipsExpandTrigger="<c-e>"
   " let g:UltiSnipsJumpForwardTrigger="<c-e>"
   " let g:UltiSnipsJumpBackwardTrigger="<c-y>"
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
-
-  let g:UltiSnipsSnippetDirectories = [
-        \ 'UltiSnips',
-        \ $HOME . '/.vim/UltiSnips',
-        \ ]
 
 endif " }}}
 if s:is_plugged('fzf.vim') " {{{
