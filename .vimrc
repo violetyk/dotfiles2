@@ -333,7 +333,7 @@ set noundofile
 " Clipboard {{{
 " クリップボードの共有
  set clipboard&
- set clipboard^=unnamedplus
+ set clipboard^=unnamed,unnamedplus
 " }}}
 
 " Search & Completion {{{
