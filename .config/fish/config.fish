@@ -57,6 +57,9 @@ type -q pyenv; and pyenv init - | source
 # nodenv
 type -q nodenv; and nodenv init - | source
 
+# fnm (Fast Node Manager)
+fnm env --use-on-cd | source
+
 # direnv
 if type -q direnv
   direnv hook fish | source
@@ -156,3 +159,4 @@ end
 
 # starship
 type -q starship; and starship init fish | source
+
