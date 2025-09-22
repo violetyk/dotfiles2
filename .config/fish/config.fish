@@ -68,6 +68,13 @@ if type -q direnv
   # set -g direnv_fish_mode disable_arrow    # trigger direnv at prompt only, this is similar functionality to the original behavior
 end
 
+#asdf
+if test -z $ASDF_DATA_DIR
+  set _asdf_shims "$HOME/.asdf/shims"
+else
+  set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
 # dircolors
 if type -q gdircolors
    and test -f ~/.dircolors
