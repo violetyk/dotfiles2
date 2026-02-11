@@ -34,6 +34,7 @@ else
 end
 
 test -d $HOME/bin; and fish_add_path $HOME/bin
+test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin
 test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
 
 # add local for local setting to ~/.config.local/fish/conf.d/local.fish
@@ -68,12 +69,22 @@ if type -q direnv
   # set -g direnv_fish_mode disable_arrow    # trigger direnv at prompt only, this is similar functionality to the original behavior
 end
 
-#asdf
+# asdf
 if test -z $ASDF_DATA_DIR
   set _asdf_shims "$HOME/.asdf/shims"
 else
   set _asdf_shims "$ASDF_DATA_DIR/shims"
 end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
+
+source (brew --prefix asdf)/libexec/asdf.fish
+
 
 # dircolors
 if type -q gdircolors
@@ -166,4 +177,3 @@ end
 
 # starship
 type -q starship; and starship init fish | source
-

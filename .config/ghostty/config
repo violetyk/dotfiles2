@@ -7,6 +7,10 @@ term = xterm-256color
 # Mac 赤黄緑ボタンを出す
 macos-non-native-fullscreen = visible-menu
 
+# クリップボードアクセスを許可
+clipboard-read = allow
+clipboard-write = allow
+
 # Ghosttyとシェルの連携機能
 shell-integration = none
 shell-integration-features = no-cursor,sudo,title

@@ -41,3 +41,5 @@ tags
 *.old
 .env.local
 .envrc
+
+**/.claude/settings.local.json
