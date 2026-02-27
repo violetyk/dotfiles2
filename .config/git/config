@@ -120,5 +120,5 @@
   path = ~/.config/git/config-linux
 
 [include]
-  path = .gitconfig.local
+  path = ~/.gitconfig.local
 
