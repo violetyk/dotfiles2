@@ -31,6 +31,16 @@ fish: ## fishの設定
 	fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 	fish -c fisher update
 	fish -c fish_update_completions
+ifeq ($(shell uname),Darwin)
+	mkdir -p $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish
+	@if [ ! -L $(HOME)/.local/share/fish/fish_history ]; then \
+		if [ -f $(HOME)/.local/share/fish/fish_history ]; then \
+			cp $(HOME)/.local/share/fish/fish_history $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish/fish_history; \
+			rm $(HOME)/.local/share/fish/fish_history; \
+		fi; \
+		ln -sfnv $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish/fish_history $(HOME)/.local/share/fish/fish_history; \
+	fi
+endif
 
 .PHONY: rust
 rust: ## Rustをインストール
