@@ -35,8 +35,7 @@ ifeq ($(shell uname),Darwin)
 	mkdir -p $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish
 	@if [ ! -L $(HOME)/.local/share/fish/fish_history ]; then \
 		if [ -f $(HOME)/.local/share/fish/fish_history ]; then \
-			cp $(HOME)/.local/share/fish/fish_history $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish/fish_history; \
-			rm $(HOME)/.local/share/fish/fish_history; \
+			mv $(HOME)/.local/share/fish/fish_history $(HOME)/.local/share/fish/fish_history_$$(date +%Y%m%d); \
 		fi; \
 		ln -sfnv $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish/fish_history $(HOME)/.local/share/fish/fish_history; \
 	fi
