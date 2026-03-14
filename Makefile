@@ -1,12 +1,8 @@
-RUBY_VERSION := 2.7.0
-
 DOTFILES_EXCLUDES := .DS_Store .git
 DOTFILES_TARGET   := $(wildcard .??*)
-DOTFILES_DIR      := $(PWD)
 DOTFILES_FILES    := $(filter-out $(DOTFILES_EXCLUDES), $(DOTFILES_TARGET))
 HOME_DIRS         := bin tmp swap undo backup tags src .config.local
 TMUX_PLUGIN_DIR   := $(HOME)/.tmux/plugins
-TMP_DIR           := $(shell mktemp -d)
 PATH              := /opt/homebrew/bin:$(PATH)
 
 .PHONY: help
@@ -29,8 +25,8 @@ brew: ## Homebrewをインストールしてbrew bundle
 .PHONY: fish
 fish: ## fishの設定
 	fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-	fish -c fisher update
-	fish -c fish_update_completions
+	fish -c "fisher update"
+	fish -c "fish_update_completions"
 ifeq ($(shell uname),Darwin)
 	mkdir -p $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish
 	@if [ ! -L $(HOME)/.local/share/fish/fish_history ]; then \
@@ -40,12 +36,6 @@ ifeq ($(shell uname),Darwin)
 		ln -sfnv $(HOME)/Library/Mobile\ Documents/com~apple~CloudDocs/violetyk/fish/fish_history $(HOME)/.local/share/fish/fish_history; \
 	fi
 endif
-
-.PHONY: rust
-rust: ## Rustをインストール
-	if ! which cargo > /dev/null 2>&1; then\
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh;\
-	fi
 
 .PHONY: tmux
 tmux: ## tmuxの設定
@@ -66,9 +56,15 @@ tmux: ## tmuxの設定
 	#
 	# True Color対応
 	#
+	$(eval TMP_DIR := $(shell mktemp -d))
 	$(HOMEBREW_PREFIX)/opt/ncurses/bin/infocmp tmux-256color > $(TMP_DIR)/tmux-256color.info
 	tic -xe  tmux-256color $(TMP_DIR)/tmux-256color.info
 	infocmp tmux-256color
+
+.PHONY: manual
+manual: ## 手動インストールが必要なアプリのダウンロードページを開く
+	@echo "ダウンロードページを開きます..."
+	open https://filezilla-project.org/download.php
 
 .PHONY: dircolors
 dircolors: ## .dircolorsの更新
