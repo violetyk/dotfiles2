@@ -39,7 +39,7 @@ tap "universal-ctags/universal-ctags"
 brew "universal-ctags"
 brew "tig"
 brew "tree"
-brew "vim", args: ["HEAD"]
+brew "vim"
 brew "watch"
 brew "wget"
 brew "yarn", args: ["ignore-dependencies"]
