@@ -20,7 +20,7 @@ brew: ## Homebrewをインストールしてbrew bundle
 	if ! which brew > /dev/null 2>&1; then\
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";\
 	fi
-	brew bundle
+	eval $$(/opt/homebrew/bin/brew shellenv) && brew bundle
 
 .PHONY: fish
 fish: ## fishの設定
