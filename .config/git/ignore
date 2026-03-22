@@ -42,4 +42,5 @@ tags
 .env.local
 .envrc
 
-**/.claude/settings.local.json
+# claude
+settings.local.json
