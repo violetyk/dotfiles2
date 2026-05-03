@@ -20,27 +20,45 @@ vim/manual/*
 # php
 .cake
 composer.phar
-setting.local.php
+settings.local.php
 core.local.php
 
 # mycli
 .myclirc
 
-# debug
-kagaya/
-[Kk]agaya*.php
-[Kk]agaya*.yml
-[Kk]agaya*.html
+# obsidian
+.obsidian
+
+# Zed
+.config/zed/prompts/
+.config/zed/extensions/
+.config/zed/conversations/
+.config/zed/db/
+.config/zed/languages/
+.config/zed/*.log
+.config/zed/**/*.mdb
+.config/zed/**/lock.mdb
+
+# macOS
+._*
+.DS_Store
+.AppleDouble
+
+# JetBrains
+.idea/
+
+# Node
+node_modules/
+
+# Claude Code
+.claude/settings.local.json
+.claude/.credentials.json
 
 # other
 __pycache__
 tags
 .agignore
 .vscode
-.DS_Store
 *.old
 .env.local
 .envrc
-
-# claude
-settings.local.json
