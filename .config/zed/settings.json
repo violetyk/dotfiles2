@@ -36,6 +36,11 @@
       "type": "registry"
     }
   },
+  "auto_install_extensions": {
+    "html": true,
+    "toml": true,
+    "markdown-oxide": true
+  },
   "vim_mode": false,
   "icon_theme": {
     "mode": "system",
