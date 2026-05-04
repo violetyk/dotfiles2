@@ -57,4 +57,7 @@ package-lock.json
 # gcloud
 .config/gcloud/
 
+# zed
+.config/zed/prompts/
+
 !.gitkeep
