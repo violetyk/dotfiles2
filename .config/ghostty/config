@@ -53,4 +53,7 @@ keybind = ctrl+t>n=next_tab
 keybind = ctrl+t>p=previous_tab
 keybind = ctrl+t>q=close_tab
 
+# ローカルの設定
+config-file = ?~/.config.local/ghostty/config
+
 # vim: set et fenc=utf-8 ff=unix ft=toml sts=2 sw=2 ts=2 : 
