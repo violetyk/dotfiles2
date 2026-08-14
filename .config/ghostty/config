@@ -29,7 +29,8 @@ confirm-close-surface = always
 font-family = "Hack Nerd Font Mono"
 font-size = 13
 font-feature = -calt,-liga,-dlig
-# adjust-cell-height = -1
+# 行間を広げる（日本語長文の可読性向上。15〜30%で好みに調整）
+adjust-cell-height = 15%
 # adjust-cell-width = -1
 
 # ターミナルのサイズ変更時にサイズを表示するポップアップを表示しない
