@@ -3,8 +3,34 @@
 Brewfile.lock.json
 package-lock.json
 
-# fish
+# ------------------------------------------------------------
+# .config
+# ~/.config はこのリポジトリの .config へのシンボリックリンクで、
+# 各アプリが設定やキャッシュを勝手に書き込む。
+# そのため原則すべて無視し、管理したいものだけを明示的に許可する。
+# 追加するときは下の許可リストに 1 行足す。
+# ------------------------------------------------------------
+.config/*
+
+# --- バージョン管理する対象 ---
+!.config/fish/
+!.config/ghostty/
+!.config/git/
+!.config/herdr/
+!.config/zed/
+!.config/pycodestyle
+!.config/starship.toml
+
+# --- 許可したディレクトリの中で除外するもの ---
+# herdr（config.toml 以外はログ・ソケット・セッション状態などの生成物）
+.config/herdr/*
+!.config/herdr/config.toml
+# fish（起動時に自動生成される変数）
 .config/fish/fish_variables
+# rust（rustup が生成）
+.config/fish/conf.d/rustup.fish
+# zed
+.config/zed/prompts/
 
 # vim
 .vim/bundle
@@ -17,47 +43,5 @@ package-lock.json
 .ipython/profile_default/pid
 .ipython/profile_default/security
 .ipython/profile_default/history.sqlite
-
-# iterm2
-.config/iterm2
-
-# configstore
-.config/configstore/
-
-# neofetch
-.config/neofetch/
-
-# 1Password
-.config/1Password/
-
-# 1Password CLI
-.config/op/
-
-# gh
-.config/gh/
-
-# GitHub Copilot
-.config/github-copilot/
-
-# JetBrains
-.config/jgit/
-
-# composer
-.config/composer/
-
-# composer
-.config/yarn/
-
-# rust
-.config/fish/conf.d/rustup.fish
-
-# filezilla
-.config/filezilla/
-
-# gcloud
-.config/gcloud/
-
-# zed
-.config/zed/prompts/
 
 !.gitkeep
