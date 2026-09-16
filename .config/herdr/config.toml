@@ -12,3 +12,17 @@ delivery = "herdr"
 default_shell = "fish"
 # macOS では auto でもログインシェルになるが、Linux でも揃えるため明示
 shell_mode = "login"
+
+[keys]
+# ghostty が ctrl+t、fish の peco が ctrl+s/r/b/j/g を使っているので ctrl+q にする
+# （既定の ctrl+b は fish の peco_select_git_checkout と衝突する）
+prefix = "ctrl+q"
+
+# 以下は ghostty の ctrl+t>... と同じ指の形に揃えたもの。
+# c/n/p（タブ）と h/j/k/l（ペイン移動）と z（ズーム）と v（右に分割）は既定のまま一致。
+split_horizontal = "prefix+s"   # 下に分割（ghostty の ctrl+t>s。既定は prefix+minus）
+settings = "prefix+shift+s"     # s を分割に譲る
+close_tab = "prefix+q"          # ghostty の ctrl+t>q。既定は prefix+shift+x
+detach = "prefix+d"             # q を close_tab に譲る（tmux と同じ d）
+reload_config = "prefix+r"      # ghostty の ctrl+t>r。既定は prefix+shift+r
+resize_mode = "prefix+shift+r"  # r を reload_config に譲る
