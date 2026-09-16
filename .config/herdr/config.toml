@@ -5,3 +5,10 @@ status_indicators = "symbols"
 
 [ui.toast]
 delivery = "herdr"
+
+[terminal]
+# 新規ペインのシェルは fish（$SHELL は zsh のため明示指定）
+# herdr は PATH から解決するので、macOS(/opt/homebrew/bin) / Linux(/usr/bin) 共通で書ける
+default_shell = "fish"
+# macOS では auto でもログインシェルになるが、Linux でも揃えるため明示
+shell_mode = "login"
