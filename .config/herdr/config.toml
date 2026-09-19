@@ -14,15 +14,18 @@ default_shell = "fish"
 shell_mode = "login"
 
 [keys]
-# ghostty が ctrl+t、fish の peco が ctrl+s/r/b/j/g を使っているので ctrl+q にする
-# （既定の ctrl+b は fish の peco_select_git_checkout と衝突する）
-prefix = "ctrl+q"
+# 左手人差し指で押せる ctrl+英字は、fish の peco（ctrl+s/r/b/j/g）と
+# readline/vim（ctrl+f=forward-char・画面送り、ctrl+v=quoted-insert・矩形選択）で
+# 埋まっていて空きが無い。そこで ghostty 側の ctrl+t> バインドを止めて
+# ctrl+t を herdr に譲った（ctrl+q は小指で押しづらいため変更）。
+# ghostty 自身の分割・タブは既定の cmd 系を使う。
+prefix = "ctrl+t"
 
-# 以下は ghostty の ctrl+t>... と同じ指の形に揃えたもの。
+# 以下は以前 ghostty の ctrl+t>... に割り当てていたのと同じ指の形。
 # c/n/p（タブ）と h/j/k/l（ペイン移動）と z（ズーム）と v（右に分割）は既定のまま一致。
-split_horizontal = "prefix+s"   # 下に分割（ghostty の ctrl+t>s。既定は prefix+minus）
+split_horizontal = "prefix+s"   # 下に分割（旧 ghostty の ctrl+t>s。既定は prefix+minus）
 settings = "prefix+shift+s"     # s を分割に譲る
-close_tab = "prefix+q"          # ghostty の ctrl+t>q。既定は prefix+shift+x
+close_tab = "prefix+q"          # 旧 ghostty の ctrl+t>q。既定は prefix+shift+x
 detach = "prefix+d"             # q を close_tab に譲る（tmux と同じ d）
-reload_config = "prefix+r"      # ghostty の ctrl+t>r。既定は prefix+shift+r
+reload_config = "prefix+r"      # 旧 ghostty の ctrl+t>r。既定は prefix+shift+r
 resize_mode = "prefix+shift+r"  # r を reload_config に譲る

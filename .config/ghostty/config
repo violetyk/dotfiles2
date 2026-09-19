@@ -39,20 +39,22 @@ resize-overlay = never
 window-inherit-working-directory = true
 
 # キーバインド
-keybind = ctrl+t>r=reload_config
-keybind = ctrl+t>z=toggle_split_zoom
-keybind = ctrl+t>enter=toggle_fullscreen
-keybind = ctrl+t>v=new_split:right
-keybind = ctrl+t>s=new_split:down
-keybind = ctrl+t>l=goto_split:right
-keybind = ctrl+t>h=goto_split:left
-keybind = ctrl+t>j=goto_split:down
-keybind = ctrl+t>k=goto_split:up
+# ctrl+t は herdr のプレフィックスに譲った（tab/split は herdr 側で操作する）。
+# ghostty 自身の分割・タブは既定の cmd 系（cmd+t / cmd+d / cmd+shift+d / cmd+[ ] / cmd+shift+enter）を使う。
+# keybind = ctrl+t>r=reload_config
+# keybind = ctrl+t>z=toggle_split_zoom
+# keybind = ctrl+t>enter=toggle_fullscreen
+# keybind = ctrl+t>v=new_split:right
+# keybind = ctrl+t>s=new_split:down
+# keybind = ctrl+t>l=goto_split:right
+# keybind = ctrl+t>h=goto_split:left
+# keybind = ctrl+t>j=goto_split:down
+# keybind = ctrl+t>k=goto_split:up
 
-keybind = ctrl+t>c=new_tab
-keybind = ctrl+t>n=next_tab
-keybind = ctrl+t>p=previous_tab
-keybind = ctrl+t>q=close_tab
+# keybind = ctrl+t>c=new_tab
+# keybind = ctrl+t>n=next_tab
+# keybind = ctrl+t>p=previous_tab
+# keybind = ctrl+t>q=close_tab
 
 # ローカルの設定
 config-file = ?~/.config.local/ghostty/config
