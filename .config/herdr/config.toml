@@ -2,6 +2,10 @@ onboarding = false
 
 [ui]
 status_indicators = "symbols"
+# タブ行右端のステータス。ペイン最大化（prefix+z）中だけ ZOOM が出る
+tab_bar_right = [
+  { type = "zoom" },
+]
 
 [ui.toast]
 delivery = "herdr"
