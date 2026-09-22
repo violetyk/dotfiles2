@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# herdr のクライアント（TUI）が起動していて、かつ AC 電源に接続しているあいだだけ
+# システムスリープを禁止する（sudo pmset -c disablesleep 1 相当）。
+# どちらかの条件が外れたら 0 に戻す。
+#
+# LaunchDaemon com.violetyk.herdr-sleep-guard から root で定期実行される。
+#
+set -u
+
+PMSET=/usr/bin/pmset
+STATE=/var/run/herdr-sleep-guard.state
+TAG=herdr-sleep-guard
+
+# herdr のクライアントが動いているか。
+# argv[0] のベース名が herdr で、第1引数が server でないプロセスを探す。
+# 常駐する `herdr server` は数日単位で生き続けるので対象から外す。
+herdr_client_running() {
+	/bin/ps -Ao args= | /usr/bin/awk '
+		{
+			n = split($1, path, "/")
+			if (path[n] == "herdr" && $2 != "server") { found = 1 }
+		}
+		END { exit found ? 0 : 1 }
+	'
+}
+
+on_ac_power() {
+	$PMSET -g ps | /usr/bin/grep -q "AC Power"
+}
+
+if herdr_client_running && on_ac_power; then
+	want=1
+else
+	want=0
+fi
+
+# SleepDisabled は 1 のときだけ pmset -g に出る。出ていなければ前回適用値を見る。
+current=$($PMSET -g | /usr/bin/awk '$1 == "SleepDisabled" { print $2; exit }')
+[ -n "$current" ] || current=$(/bin/cat "$STATE" 2>/dev/null || echo 0)
+
+[ "$current" = "$want" ] && exit 0
+
+if $PMSET -c disablesleep "$want"; then
+	echo "$want" > "$STATE"
+	/usr/bin/logger -t "$TAG" "disablesleep: $current -> $want"
+else
+	/usr/bin/logger -t "$TAG" "pmset failed (want=$want)"
+fi

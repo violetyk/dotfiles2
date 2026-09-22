@@ -69,3 +69,17 @@ manual: ## 手動インストールが必要なアプリのダウンロードペ
 .PHONY: dircolors
 dircolors: ## .dircolorsの更新
 	curl -sL https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark > .dircolors
+
+.PHONY: herdr-sleep-guard
+herdr-sleep-guard: ## herdr起動中かつAC電源接続中はスリープさせないLaunchDaemonを導入（要sudo）
+	sudo install -o root -g wheel -m 755 etc/herdr-sleep-guard/herdr-sleep-guard /usr/local/bin/herdr-sleep-guard
+	sudo install -o root -g wheel -m 644 etc/herdr-sleep-guard/com.violetyk.herdr-sleep-guard.plist /Library/LaunchDaemons/com.violetyk.herdr-sleep-guard.plist
+	-sudo launchctl bootout system/com.violetyk.herdr-sleep-guard 2>/dev/null
+	sudo launchctl bootstrap system /Library/LaunchDaemons/com.violetyk.herdr-sleep-guard.plist
+	sudo launchctl print system/com.violetyk.herdr-sleep-guard | head -5
+
+.PHONY: herdr-sleep-guard-uninstall
+herdr-sleep-guard-uninstall: ## herdrスリープ制御の解除（スリープ設定も既定に戻す）
+	-sudo launchctl bootout system/com.violetyk.herdr-sleep-guard 2>/dev/null
+	sudo rm -f /Library/LaunchDaemons/com.violetyk.herdr-sleep-guard.plist /usr/local/bin/herdr-sleep-guard /var/run/herdr-sleep-guard.state
+	sudo pmset -c disablesleep 0
