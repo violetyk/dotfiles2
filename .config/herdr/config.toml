@@ -48,3 +48,8 @@ resize_mode = "prefix+shift+r"  # r を reload_config に譲る
 next_workspace = "prefix+t"             # 次のワークスペースへ
 switch_workspace = "prefix+shift+1..9"  # 番号でワークスペースへジャンプ
 new_workspace = "prefix+shift+c"        # ワークスペース作成（既定は prefix+shift+n）
+
+[experimental]
+# IME がオンのままプレフィックスを押すと、続く文字が変換対象に吸われてコマンドが登録されない。
+# prefix モード中だけ ASCII 入力に切り替え、抜けたら元の入力ソースに戻す（macOS/Windows のみ・best-effort）。
+switch_ascii_input_source_in_prefix = true
