@@ -36,8 +36,13 @@ prefix = "ctrl+t"
 # c/n/p（タブ）と h/j/k/l（ペイン移動）と z（ズーム）と v（右に分割）は既定のまま一致。
 split_horizontal = "prefix+s"   # 下に分割（旧 ghostty の ctrl+t>s。既定は prefix+minus）
 settings = "prefix+shift+s"     # s を分割に譲る
-close_tab = "prefix+q"          # 旧 ghostty の ctrl+t>q。既定は prefix+shift+x
-detach = "prefix+d"             # q を close_tab に譲る（tmux と同じ d）
+# 閉じる系は既定のまま使う（close_pane=prefix+x, close_tab=prefix+shift+x,
+# close_workspace=prefix+shift+d）。prefix+q には割り当てない。
+# 2026-09-22、ピッカーの prefix+w と押し間違えて prefix+q の close_tab を叩き、
+# 最後の1枚だったためワークスペースごと消した。0.9.1 時点ではこの経路に確認が無く
+# （herdrdev/herdr#4379）、設定でも塞げない。修正 #4409 は 2026-09-20 に master へ
+# マージ済みなので、次の安定版が出たら prefix+q に戻してよい。
+detach = "prefix+d"             # tmux と同じ d（既定は prefix+q だが、q は空けておく）
 reload_config = "prefix+r"      # 旧 ghostty の ctrl+t>r。既定は prefix+shift+r
 resize_mode = "prefix+shift+r"  # r を reload_config に譲る
 
