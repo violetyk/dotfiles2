@@ -2,6 +2,13 @@ onboarding = false
 
 [ui]
 status_indicators = "symbols"
+# ワークスペースを閉じる前に確認する（既定値だが、誤操作で消したことがあるので明示）
+# 注: 最後のタブを close_tab で閉じた場合はこの確認を通らずワークスペースごと消える
+confirm_close = true
+# タブ名は聞かずに即作成（既定は true）
+prompt_new_tab_name = false
+# ワークスペースは作成時に名前を聞く（既定は false）。あとからリネームする手間を省く
+prompt_new_workspace_name = true
 # タブ行右端のステータス。ペイン最大化（prefix+z）中だけ ZOOM が出る
 tab_bar_right = [
   { type = "zoom" },
