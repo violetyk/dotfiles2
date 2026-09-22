@@ -33,3 +33,11 @@ close_tab = "prefix+q"          # 旧 ghostty の ctrl+t>q。既定は prefix+sh
 detach = "prefix+d"             # q を close_tab に譲る（tmux と同じ d）
 reload_config = "prefix+r"      # 旧 ghostty の ctrl+t>r。既定は prefix+shift+r
 resize_mode = "prefix+shift+r"  # r を reload_config に譲る
+
+# ワークスペース系。ピッカーは既定の prefix+w のまま。
+# t は空きで、prefix=ctrl+t と同じ指で連打して次へ送れる（既定は未設定）。
+# 番号ジャンプは「タブの prefix+1..9 のワークスペース版」として shift を足した（既定は未設定）。
+# 作成は「タブ作成 prefix+c のワークスペース版」として shift+c に揃えた（既定は prefix+shift+n）。
+next_workspace = "prefix+t"             # 次のワークスペースへ
+switch_workspace = "prefix+shift+1..9"  # 番号でワークスペースへジャンプ
+new_workspace = "prefix+shift+c"        # ワークスペース作成（既定は prefix+shift+n）
