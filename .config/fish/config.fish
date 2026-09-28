@@ -165,7 +165,7 @@ if test $OS = "Darwin"
   alias desktop_hide "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
   alias desktop_show "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-  type -q gls; and alias ls 'gls --color=auto $argv'
+  type -q gls; and alias ls 'gls --color=auto'
   type -q ggrep; and alias grep 'ggrep'
   type -q gxargs; and alias xargs 'gxargs'
 end
