@@ -22,6 +22,14 @@ brew: ## Homebrewをインストールしてbrew bundle
 	fi
 	eval $$(/opt/homebrew/bin/brew shellenv) && brew bundle
 
+.PHONY: claude
+claude: ## Claude Codeを公式インストーラで導入（~/.local/bin/claude）
+	curl -fsSL https://claude.ai/install.sh | bash
+
+.PHONY: codex
+codex: ## Codex CLIを公式インストーラで導入（~/.local/bin/codex）
+	curl -fsSL https://chatgpt.com/codex/install.sh | sh
+
 .PHONY: fish
 fish: ## fishの設定
 	fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
