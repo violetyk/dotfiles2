@@ -28,7 +28,7 @@ claude: ## Claude Codeを公式インストーラで導入（~/.local/bin/claude
 
 .PHONY: codex
 codex: ## Codex CLIを公式インストーラで導入（~/.local/bin/codex）
-	curl -fsSL https://chatgpt.com/codex/install.sh | sh
+	curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
 
 .PHONY: fish
 fish: ## fishの設定
